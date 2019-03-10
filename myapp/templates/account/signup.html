@@ -1,24 +1,80 @@
-{% extends "account/base.html" %}
-{% load crispy_forms_tags %}
-{% load i18n %}
 
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-<h1 class="large-txt">{% trans "Sign Up" %}</h1>
-    <hr class="mt-0 mb-4">
-<form class="signup medium-txt col-md-6" id="signup_form" method="post" action="{% url 'account_signup' %}">
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Sign In to {{ SITE_NAME}}
+{% endblock %}
+
+{% block body %}  
+<div class="centered">  
+  <img class="logo" src={% static 'imgs/logo.png' %} alt="" width="100" height="100">
+  <form class="form-signin" method="post" action="">
   {% csrf_token %}
-  {{ form | crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <p class="medium-txt"><a href="{{ login_url }}">{% trans 'Already have an account?' %}</a></p>
-  <button type="submit" class="btn btn-success">{% trans "Sign Up" %}</button>
-</form>
-</div>
-</div>
+    <label for="first" class="sr-only">First Name</label>
+    <input type="text" id="first" class="form-control" placeholder="First Name" required autofocus>
+    <label for="last" class="sr-only">Last Name</label>
+    <input type="text" id="last" class="form-control" placeholder="Last Name">
+    <label for="email" class="sr-only">E-mail Address</label>
+    <input type="email" id="email" class="form-control" placeholder="E-mail Address">
+    <label for="password" class="sr-only">Password</label>
+    <input type="passsword" id="password" class="form-control" placeholder="Password">
+    <label for="confirm" class="sr-only">Confirm Passwword</label>
+    <input type="password" id="confirm" class="form-control" placeholder="Confirm Password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <div class="note mb-3 text-center">
+      <p>Already registered? <a href={% url 'account_login' %}>Sign In!</a></p>
+    </div>       
+    
+  </form>
 </div>
 
+<style>
+  .centered {
+    display:flex;
+    flex-direction: column;
+    justify-align:center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+ 
+  .logo{
+    margin-top: auto;
+  }
+
+  .form-signin {
+    width: 25%;
+    padding: 15px;
+    margin-bottom: auto;
+  }
+
+  .form-signin .note {
+    margin-top: 10px;
+    font-weight: 400;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+
+  .form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>
 {% endblock %}

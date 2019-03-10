@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Sign In to {{ SITE_NAME}}
+{% endblock %}
+
+{% block body %}  
+<div class="centered">  
+  <img class="logo" src={% static 'imgs/logo.png' %} alt="" width="100" height="100">
+  <form class="form-signin" method="post" action={% url 'account_login' %}>
+  {% csrf_token %}
+    <label for="inputLogin" class="sr-only">Email address or Username</label>
+    <input type="text" id="inputLogin" class="form-control" placeholder="Email or Username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="note mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <div class="note mb-3 text-center">
+      <p>Forgot? <a href="#">Retrieve your login.</a></p>
+      <p>Not registered? <a href="#">Sign Up!</a></p>
+    </div>       
+    
+  </form>
+</div>
+
+<style>
+  .centered {
+    display:flex;
+    flex-direction: column;
+    justify-align:center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+ 
+  .logo{
+    margin-top: auto;
+    margin-bottom: 2%;
+  }
+
+  .form-signin {
+    width: 50%;
+    max-width: 330px;
+    padding: 15px;
+    margin-bottom: auto;
+  }
+
+  .form-signin .note {
+    margin-top: 10px;
+    font-weight: 400;
+  }
+
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+</style>
+
+{% endblock %}

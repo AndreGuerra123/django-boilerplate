@@ -10,6 +10,8 @@ django-heroku = "*"
 django-allauth = "*"
 "django-bootstrap4" = "*"
 envision = "*"
+django-fontawesome = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

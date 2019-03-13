@@ -1,30 +1,55 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap4 %}
+
 
 {% block title %}
-Sign In to {{ SITE_NAME}}
+Sign In to {{ SITE_NAME }}
 {% endblock %}
 
-{% block body %}  
+{% block body %}
+
+
+
 <div class="centered">  
   <img class="logo" src={% static 'imgs/logo.png' %} alt="" width="100" height="100">
-  <form class="form-signin" method="post" action="">
-  {% csrf_token %}
-    <label for="inputLogin" class="sr-only">Email address or Username</label>
-    <input type="text" id="login" class="form-control" placeholder="Email or Username" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="password" class="form-control" placeholder="Password" required>
+  <form id="login_form" class="form-signin" method="post" action="">
+    {% csrf_token %}
+    <label for="login" class="sr-only">Email address or Username</label>
+    <input type="text" id="login" name="login" class="form-control" placeholder="Email or Username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
     <div class="note mb-3">
       <label>
-        <input type="checkbox" value="remember" id="remember"> Remember me
+        <input type="checkbox" value="remember" id="remember" name="remember"> Remember me
       </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <div class="note mb-3 text-center">
       <p>Forgot? <a href="#">Retrieve your login.</a></p>
       <p>Not registered? <a href={% url 'account_signup'%}>Sign Up!</a></p>
-    </div>       
-    
+    </div>
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ field|escape }}</strong>
+                <strong>{{ error|escape }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+    {% endfor %}
+    {% endif %}     
   </form>
 </div>
 

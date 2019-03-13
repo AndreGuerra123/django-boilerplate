@@ -56,6 +56,16 @@ EMAIL_HOST_USER =  env.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = int(env.get('EMAIL_PORT'))
 
+DJANGO_AUTO_USER = [
+    {
+        'username':'admin',
+        'email':'admin@email.com',
+        'password':'mypass',
+        'is_superuser': True,
+        'is_staff':True,
+        'is_active':True
+    }
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -74,7 +84,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
-    
+    'dau'   
 ]
 
 MIDDLEWARE = [

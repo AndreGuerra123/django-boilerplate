@@ -58,9 +58,9 @@ EMAIL_PORT = int(env.get('EMAIL_PORT'))
 
 DJANGO_AUTO_USER = [
     {
-        'username':'admin',
-        'email':'admin@email.com',
-        'password':'mypass',
+        'username':env.get('ADMIN_USERNAME'),
+        'email': env.get('ADMIN_EMAIL'),
+        'password':env.get('ADMIN_PASS'),
         'is_superuser': True,
         'is_staff':True,
         'is_active':True

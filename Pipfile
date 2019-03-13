@@ -12,7 +12,7 @@ django-allauth = "*"
 envision = "*"
 django-fontawesome = "*"
 django-crispy-forms = "*"
-dau = "*"
+dau = "==0.1.3"
 
 [dev-packages]
 

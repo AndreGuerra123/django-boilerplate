@@ -1,20 +1,33 @@
-{% extends "account/base.html" %}
+{% extends 'info.html' %}
+{% load staticfiles %}
+{% load bootstrap4 %}
 {% load i18n %}
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-<h1 class="large-txt">{% trans "Verify Your E-mail Address" %}</h1>
-<hr class="mt-0 mb-4">
+
+{% block title %}
+{% trans "Verify E-mail"%} - {{ SITE_NAME }}
+{% endblock %}
+
+{% block info_meta %}
+{% trans "Account"%}
+{% endblock %}
+
+{% block info_title %}
+{% trans "Verify Your E-mail"%}
+{% endblock %}
+
+{% block info_text %} 
 {% url 'account_email' as email_url %}
-<p class="medium-txt">{% blocktrans %}This part of the site requires us to verify that
+
+<p>{% blocktrans %}This part of the site requires us to verify that
 you are who you claim to be. For this purpose, we require that you
 verify ownership of your e-mail address. {% endblocktrans %}</p>
-<p class="medium-txt">{% blocktrans %}We have sent an e-mail to you for
+
+<p>{% blocktrans %}We have sent an e-mail to you for
 verification. Please click on the link inside this e-mail. Please
 contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
-<p class="medium-txt">{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
-</div>
-</div>
-</div>
+
+<p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
 {% endblock %}
+
+
+

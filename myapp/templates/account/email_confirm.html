@@ -1,27 +1,51 @@
-{% extends "account/base.html" %}
-{% load crispy_forms_tags %}
+{% extends "info.html" %}
 {% load i18n %}
 {% load account %}
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-<h1 class="large-txt">{% trans "Confirm E-mail Address" %}</h1>
-<hr class="mt-0 mb-4">
+
+{% block title%}
+{% if confirmation %}
+{% trans 'Confirm E-mail' %} - {{ SITE_NAME }}
+{% else %}
+{% trans 'Confirm E-mail Error' %} - {{ SITE_NAME }}
+{% endif %}
+{% endblock %}
+
+{% block info_meta %} 
+{% if confirmation %}
+{% trans 'Accounts' %}
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endblock%}
+
+
+{% block info_title %}
+{% if confirmation %}
+{% trans 'Confirm Your E-mail Address' %} 
+{% else %}
+{% trans 'E-mail Address Confirmation Error' %}
+{% endif %}{% endblock %}
+
+{% block info_text %}
 {% if confirmation %}
 {% user_display confirmation.email_address.user as user_display %}
-<p class="medium-txt">{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-<form class = "medium-txt col-md-6" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+<form class = "form" method="post" action="{% url 'account_confirm_email' confirmation.key %}">
     {% csrf_token %}
-    {{ form | crispy}}
+    {% include 'account/snippets/form_errors.html'%}
     <button type="submit" class="btn btn-success">{% trans 'Confirm' %}</button>
 </form>
 {% else %}
 {% url 'account_email' as email_url %}
-<p class="medium-txt">{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
 {% endif %}
-</div>
-</div>
-</div>
 {% endblock %}
+
+{% block info_actions %}
+{% if confirmation %}
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endblock %}
+
 

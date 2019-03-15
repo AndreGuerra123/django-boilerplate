@@ -20,5 +20,8 @@ from myapp import views
 urlpatterns = [
     path('',views.HomeView.as_view(),name="home"),
     path('signin',views.SignIn.as_view(),name="signin"),
-    path('signup',views.SignUp.as_view(),name="signup")
+    path('signup',views.SignUp.as_view(),name="signup"),
+    path('test',views.TestTemplate.as_view(),name="test"),
+    path('signup',views.SignUp.as_view(),name="contactus"), #TODO:
+
 ]

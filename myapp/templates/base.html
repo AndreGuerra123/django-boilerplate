@@ -15,9 +15,14 @@
 
 <head>
 
+    <link rel="shortcut icon" href="{% static 'imgs/logo.png' %}"/>
+
+
     <title>
         {% block title %}
+        {{ SITE_NAME }}
         {% endblock title%}
+        
     </title>
 
     <style>

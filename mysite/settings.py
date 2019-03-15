@@ -56,6 +56,9 @@ EMAIL_HOST_USER =  env.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = int(env.get('EMAIL_PORT'))
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 DJANGO_AUTO_USER = [
     {
         'username':env.get('ADMIN_USERNAME'),

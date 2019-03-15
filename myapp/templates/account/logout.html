@@ -1,26 +1,32 @@
-{% extends "account/base.html" %}
-{% load crispy_forms_tags %}
-{% load i18n %} 
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-<h1 class="large-txt">{% trans "Sign Out" %}</h1>
-<hr class="mt-0 mb-4">
-<p class="medium-txt">{% trans 'Are you sure you want to sign out?' %}</p>
+{% extends 'info.html' %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% load i18n %}
 
-<form class="medium-txt col-md-6" method="post" action="{% url 'account_logout' %}">
+{% block title %}
+{% trans "Sign Out of"%} {{ SITE_NAME }}
+{% endblock %}
+
+{% block info_meta %}
+{% trans "Accounts" %}
+{% endblock info_meta %}
+
+{% block info_title %}
+{% trans "Sign Out" %}
+{% endblock %}
+
+{% block info_text %}
+  <p>{% trans 'Are you sure you want to sign out?' %}</p>
+  <form  method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
-  {{ form | crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button type="submit" class="btn btn-success">{% trans 'Sign Out' %}</button>
+  {% include 'account/snippets/form_errors.html'%}
+  <button type="submit" class="btn btn-primary">{% trans 'Sign Out' %}</button>
+  <a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}">{% trans 'Go back' %}</a>
 </form>
+{% endblock %}
 
-</div>	
-</div>
-</div>
-
-
+{% block info_actions %}
 {% endblock %}

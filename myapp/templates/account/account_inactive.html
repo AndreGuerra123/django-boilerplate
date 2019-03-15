@@ -1,14 +1,15 @@
-{% extends "account/base.html" %}
+{% extends "info.html" %}
 {% load i18n %}
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-<h1 class="large-txt">{% trans "Account Inactive" %}</h1>
-<hr class="mt-0 mb-4">
-<p class="medium-txt">{% trans "This account is inactive." %}</p>
-</div>
-</div>
-</div>
+{% block title %}
+{% trans 'Account Inactive'%} - {{ SITE_NAME }}
+{% endblock %}
 
+{% block info_title%}
+{% trans "Account Inactive" %}
+{% endblock %}
+
+{% block info_text %}
+{% blocktrans %}
+This account is inactive at the moment.{% endblocktrans %}
+<br>{% blocktrans %}Please try again later or contact us.{% endblocktrans %}
 {% endblock %}

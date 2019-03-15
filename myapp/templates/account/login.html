@@ -1,107 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'info.html' %}
 {% load staticfiles %}
 {% load bootstrap4 %}
-
+{% load i18n %}
 
 {% block title %}
-Sign In to {{ SITE_NAME }}
+{% trans "Sign In"%} - {{ SITE_NAME }}
 {% endblock %}
 
-{% block body %}
+
+{% block info_meta %}
+{% trans "Welcome"%}
+{% endblock %}
+
+{% block info_title %}
+{% trans "Sign In to "%} {{SITE_NAME}}
+{% endblock %}
 
 
+{% block info_text %}
 
-<div class="centered">  
-  <img class="logo" src={% static 'imgs/logo.png' %} alt="" width="100" height="100">
-  <form id="login_form" class="form-signin" method="post" action="">
+  <form id="login_form" class="form" method="post" action="{% url 'account_login'%}">
     {% csrf_token %}
-    <label for="login" class="sr-only">Email address or Username</label>
-    <input type="text" id="login" name="login" class="form-control" placeholder="Email or Username" required autofocus>
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <div class="note mb-3">
+    {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <input type="text" id="login" name="login" class="form-control" placeholder="{% trans 'E-mail or Username' %}" required autofocus>
+    <input type="password" id="password" name="password" class="form-control" placeholder="{% trans 'Password' %}" required>
+    <div class="note">
       <label>
-        <input type="checkbox" value="remember" id="remember" name="remember"> Remember me
+        <input type="checkbox" value="remember" id="remember" name="remember"> {% trans 'Remember me' %}
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <div class="note mb-3 text-center">
-      <p>Forgot? <a href="#">Retrieve your login.</a></p>
-      <p>Not registered? <a href={% url 'account_signup'%}>Sign Up!</a></p>
+    {% include 'account/snippets/form_errors.html'%}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'Sign In' %}</button>
+    <div class="text-center text-muted">
+      <a href="{% url 'account_reset_password'%}">{% trans 'Forgot password?'%}</a> &middot; <a href="{% url 'account_signup'%}">{% trans 'Not registered?'%}</a>
     </div>
-    {% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ field|escape }}</strong>
-                <strong>{{ error|escape }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-        </div>
-    {% endfor %}
-    {% endif %}     
   </form>
-</div>
 
 <style>
-  .centered {
-    display:flex;
-    flex-direction: column;
-    justify-align:center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
- 
-  .logo{
-    margin-top: auto;
-    margin-bottom: 2%;
-  }
 
-  .form-signin {
-    width: 50%;
-    max-width: 330px;
-    padding: 15px;
-    margin-bottom: auto;
-  }
-
-  .form-signin .note {
-    margin-top: 10px;
+  .note {
+    margin: 2%;
     font-weight: 400;
   }
 
-  .form-signin .form-control {
+  .form .form-control {
     position: relative;
     box-sizing: border-box;
     height: auto;
-    padding: 10px;
     font-size: 16px;
   }
 
-  .form-signin .form-control:focus {
+  .form .form-control:focus {
     z-index: 2;
   }
 
-  .form-signin input[type="text"] {
+  .form input[type="text"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  .form-signin input[type="password"] {
+  .form input[type="password"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 </style>
 
+{% endblock %}
+
+{% block info_actions %}
 {% endblock %}

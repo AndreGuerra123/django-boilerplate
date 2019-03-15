@@ -1,13 +1,26 @@
-{% extends "account/base.html" %}
+{% extends 'info.html' %}
+{% load staticfiles %}
+{% load bootstrap4 %}
 {% load i18n %}
-{% block content %}
-<div class="glb">	
-<div class="glb-h">
-<div class="glb-h-e">
-    <h1 class="large-txt">{% trans "Verify Your E-mail Address" %}</h1>
-    <hr class="mt-0 mb-4">
-    <p class="medium-txt">{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
-</div>
-</div>
-</div>
+
+{% block title %}
+{% trans "Verify E-mail"%} - {{ SITE_NAME }}
 {% endblock %}
+
+{% block info_meta %}
+{% trans "Account"%}
+{% endblock %}
+
+{% block info_title %}
+{% trans "Verify Your E-mail"%}
+{% endblock %}
+
+{% block info_text %} 
+{% blocktrans %}
+We have sent an e-mail to you for
+verification.{% endblocktrans %}
+<br>{% blocktrans %}Please contact us if you do not receive it within a few minutes.{% endblocktrans %}
+{% endblock %}
+
+
+

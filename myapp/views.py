@@ -8,3 +8,6 @@ class SignIn(generic.TemplateView):
 
 class SignUp(generic.TemplateView):
     template_name = 'signup.html'
+
+class TestTemplate(generic.TemplateView):
+    template_name = "account/signup.html"
